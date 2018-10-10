@@ -23,8 +23,8 @@ struct TimevalDef {
 impl EventTime {
     pub fn new(secs: i64, usecs: i64) -> Self {
         EventTime(timeval {
-            tv_sec: secs,
-            tv_usec: usecs,
+            tv_sec: secs.into(),
+            tv_usec: usecs.into(),
         })
     }
 
@@ -33,19 +33,19 @@ impl EventTime {
     }
 
     pub fn seconds(&self) -> i64 {
-        (self.0).tv_sec
+        (self.0).tv_sec.into()
     }
 
     pub fn set_seconds(&mut self, value: i64) {
-        (self.0).tv_sec = value
+        (self.0).tv_sec = value as _;
     }
 
     pub fn microseconds(&self) -> i64 {
-        (self.0).tv_usec
+        (self.0).tv_usec.into()
     }
 
     pub fn set_microseconds(&mut self, value: i64) {
-        (self.0).tv_usec = value
+        (self.0).tv_usec = value as _;
     }
 
     pub fn into_inner(self) -> timeval {
